@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "docsRoot": "https://docs.copilotkit.ai/angular/langgraph-python",
+  "syncedAt": "2026-08-18T06:52:02.951Z",
+  "pages": {
+    "/angular/langgraph-python": {
+      "file": "angular__langgraph-python.md",
+      "sha256": "eb69a1d2ac037399f2949c88ffe27fa2b66eaa42a4df0d10181a8c1ceefcca07",
+      "bytes": 7536,
+      "lines": 200,
+      "routes": [
+        "/",
+        "/doc-sync"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Tue, 18 Aug 2026 06:52:03 GMT"
+    },
+    "/angular/langgraph-python/guides/a2ui": {
+      "file": "angular__langgraph-python__guides__a2ui.md",
+      "sha256": "d6eb9e68ed92a619ad11a19390533e31783ef64da99b70af1e861ac5d2faeee1",
+      "bytes": 5873,
+      "lines": 195,
+      "routes": [
+        "/a2ui"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Tue, 18 Aug 2026 06:52:05 GMT"
+    },
+    "/angular/langgraph-python/guides/chat-ui": {
+      "file": "angular__langgraph-python__guides__chat-ui.md",
+      "sha256": "f0f711050a35f2f1455f8158c4f6cc7270f994d04c5d54cda48a7b07bd23050a",
+      "bytes": 5149,
+      "lines": 178,
+      "routes": [
+        "/chat-ui"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Tue, 18 Aug 2026 06:52:05 GMT"
+    },
+    "/angular/langgraph-python/guides/frontend-tools-generative-ui": {
+      "file": "angular__langgraph-python__guides__frontend-tools-generative-ui.md",
+      "sha256": "7353e3216f2b19c770d6b1538a98922359f509c239645bbbe9536e530c1a879e",
+      "bytes": 5738,
+      "lines": 178,
+      "routes": [
+        "/frontend-tools-generative-ui"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Tue, 18 Aug 2026 06:52:05 GMT"
+    },
+    "/angular/langgraph-python/guides/human-in-the-loop": {
+      "file": "angular__langgraph-python__guides__human-in-the-loop.md",
+      "sha256": "5cb0f2207b458e2ffb074c828b224ddb98d2e1a205ae373391a08a582c0b7ccb",
+      "bytes": 7182,
+      "lines": 227,
+      "routes": [
+        "/human-in-the-loop"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Tue, 18 Aug 2026 06:52:05 GMT"
+    },
+    "/angular/langgraph-python/guides/shared-state": {
+      "file": "angular__langgraph-python__guides__shared-state.md",
+      "sha256": "5c97121362936adb51c715c42b3d1d8bc4f3dada03d9f385672105b02576fa79",
+      "bytes": 4732,
+      "lines": 151,
+      "routes": [
+        "/shared-state"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Tue, 18 Aug 2026 06:52:05 GMT"
+    },
+    "/angular/langgraph-python/guides/threads-memory-attachments-headless": {
+      "file": "angular__langgraph-python__guides__threads-memory-attachments-headless.md",
+      "sha256": "869c59f7eee0344bc2efad1464c7d06dbb4e943b2d33d05acb45f180f25259cb",
+      "bytes": 8952,
+      "lines": 302,
+      "routes": [
+        "/threads",
+        "/memory",
+        "/attachments",
+        "/headless"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Tue, 18 Aug 2026 06:52:04 GMT"
+    },
+    "/angular/langgraph-python/guides/voice-multimodal": {
+      "file": "angular__langgraph-python__guides__voice-multimodal.md",
+      "sha256": "14b78cdea22375c0f31d6a67cb2f5835d88ff5c2cfecb514c24400bf71c0c965",
+      "bytes": 3812,
+      "lines": 111,
+      "routes": [
+        "/voice-multimodal"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Tue, 18 Aug 2026 06:52:05 GMT"
+    },
+    "/angular/langgraph-python/quickstart": {
+      "file": "angular__langgraph-python__quickstart.md",
+      "sha256": "eb69a1d2ac037399f2949c88ffe27fa2b66eaa42a4df0d10181a8c1ceefcca07",
+      "bytes": 7536,
+      "lines": 200,
+      "routes": [
+        "/quickstart"
+      ],
+      "status": "ok",
+      "age": 0,
+      "date": "Tue, 18 Aug 2026 06:52:05 GMT"
+    }
+  },
+  "sitemap": {
+    "fetchedAt": "2026-08-18T06:52:02.951Z",
+    "urlsUnderRoot": 3,
+    "knownUnmapped": [
+      "https://docs.copilotkit.ai/angular/langgraph-python/configurable",
+      "https://docs.copilotkit.ai/angular/langgraph-python/subgraphs"
+    ]
+  }
+}
