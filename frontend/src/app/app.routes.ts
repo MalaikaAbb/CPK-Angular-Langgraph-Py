@@ -53,6 +53,18 @@ export const routes: Routes = [
     path: 'headless/demo',
     loadComponent: () => import('./pages/demos').then((m) => m.HeadlessDemo),
   },
+  {
+    path: 'subgraphs/demo',
+    loadComponent: () => import('./pages/demos').then((m) => m.SubgraphsDemo),
+  },
+  {
+    path: 'guardrails/demo',
+    loadComponent: () => import('./pages/demos').then((m) => m.GuardrailsDemo),
+  },
+  {
+    path: 'subagents/demo',
+    loadComponent: () => import('./pages/demos').then((m) => m.SubagentsDemo),
+  },
 
   // Doc routes, inside the sidebar chrome.
   {
@@ -86,6 +98,13 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/attachments'),
       },
       { path: 'headless', loadComponent: () => import('./pages/headless') },
+      {
+        path: 'configurable',
+        loadComponent: () => import('./pages/configurable'),
+      },
+      { path: 'subgraphs', loadComponent: () => import('./pages/subgraphs') },
+      { path: 'guardrails', loadComponent: () => import('./pages/guardrails') },
+      { path: 'subagents', loadComponent: () => import('./pages/subagents') },
       { path: 'status', loadComponent: () => import('./pages/status') },
       { path: 'doc-sync', loadComponent: () => import('./pages/doc-sync') },
       { path: '**', redirectTo: '' },
