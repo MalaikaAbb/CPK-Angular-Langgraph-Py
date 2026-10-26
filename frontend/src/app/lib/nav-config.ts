@@ -201,6 +201,57 @@ export const NAV: NavGroup[] = [
     ],
   },
   {
+    title: 'LangGraph',
+    routes: [
+      {
+        path: '/configurable',
+        title: 'Configurable',
+        docPath: '/angular/langgraph-python/configurable',
+        summary:
+          'Which channel carries which runtime value: agent context for UI preferences, headers for auth, and backend-owned graph config.',
+        status: 'reference',
+        statusNote:
+          'The guide’s request-local agent depends on an auth flow it does not show, and this harness has none; its samples are shown as published.',
+      },
+      {
+        path: '/subgraphs',
+        hasDemo: true,
+        title: 'Subgraphs',
+        docPath: '/angular/langgraph-python/subgraphs',
+        summary:
+          'A travel supervisor routing to flights, hotels, and experiences subgraphs, with their state streamed into injectAgentStore.',
+        status: 'partial',
+        statusNote:
+          'Subgraph streaming is live, but the demo graph’s interrupt() picks have no Angular picker, so a run stops at the first interrupt.',
+      },
+      {
+        path: '/guardrails',
+        hasDemo: true,
+        title: 'Guardrails & DLP',
+        docPath: '/angular/langgraph-python/guardrails',
+        summary:
+          'PIIMiddleware redacting, masking, and blocking ahead of CopilotKitMiddleware, plus the guide’s custom firewalls.',
+        status: 'working',
+        statusNote:
+          'The PIIMiddleware example is live. The custom input, output, and tool firewalls are reference only: their policy functions are left to the reader.',
+      },
+    ],
+  },
+  {
+    title: 'Multi-agent',
+    routes: [
+      {
+        path: '/subagents',
+        hasDemo: true,
+        title: 'Sub-agents',
+        docPath: '/angular/langgraph-python/multi-agent/subagents',
+        summary:
+          'A supervisor delegating to research, writing, and critique sub-agents, with a live delegation log driven by shared state.',
+        status: 'working',
+      },
+    ],
+  },
+  {
     title: 'Doc Sync',
     routes: [
       {

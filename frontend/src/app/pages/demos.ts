@@ -14,12 +14,15 @@ import { DemoFrame } from '../components/demo-frame';
 import { A2uiChatComponent } from '../features/a2ui/a2ui-chat.component';
 import { MediaChatComponent } from '../features/attachments/media-chat.component';
 import { ChatUiDemoComponent } from '../features/chat-ui/chat-ui-demo.component';
+import { GuardrailsChatComponent } from '../features/guardrails/guardrails-chat.component';
 import { HeadlessChatComponent } from '../features/headless/headless-chat.component';
 import { HitlChatComponent } from '../features/hitl/hitl-chat.component';
 import { MemoryDemoComponent } from '../features/memory/memory-demo.component';
 import { VoiceChatComponent } from '../features/media/voice-chat.component';
 import { QuickstartChat } from '../features/quickstart/quickstart-chat';
 import { SharedStateChatComponent } from '../features/shared-state/shared-state-chat.component';
+import { SubagentsChatComponent } from '../features/subagents/subagents-chat.component';
+import { SubgraphsDemoComponent } from '../features/subgraphs/subgraphs-demo.component';
 import { ThreadsDemoComponent } from '../features/threads/threads-demo.component';
 import { ToolsChatComponent } from '../features/tools/tools-chat.component';
 
@@ -120,3 +123,24 @@ export class AttachmentsDemo {}
   ></app-demo-frame>`,
 })
 export class HeadlessDemo {}
+
+@Component({
+  selector: 'app-subgraphs-demo-page',
+  imports: [DemoFrame, SubgraphsDemoComponent],
+  template: `<app-demo-frame backTo="/subgraphs"><app-subgraphs-demo /></app-demo-frame>`,
+})
+export class SubgraphsDemo {}
+
+@Component({
+  selector: 'app-guardrails-demo-page',
+  imports: [DemoFrame, GuardrailsChatComponent],
+  template: `<app-demo-frame backTo="/guardrails"><app-guardrails-chat /></app-demo-frame>`,
+})
+export class GuardrailsDemo {}
+
+@Component({
+  selector: 'app-subagents-demo-page',
+  imports: [DemoFrame, SubagentsChatComponent],
+  template: `<app-demo-frame backTo="/subagents"><app-subagents-chat /></app-demo-frame>`,
+})
+export class SubagentsDemo {}

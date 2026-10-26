@@ -11,6 +11,8 @@ import { join, relative, posix, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
+/** The quickstart's backend step lives outside `frontend/`. */
+const repoRoot = fileURLToPath(new URL('../..', import.meta.url));
 
 /** Files and directories whose contents routes are allowed to display. */
 const TARGETS = [
@@ -18,9 +20,11 @@ const TARGETS = [
   'src/styles.css',
   'src/app/app.config.ts',
   'src/app/features',
+  '../backend/main.py',
+  '../backend/agents',
 ];
 
-const EXTENSIONS = ['.ts', '.html', '.css'];
+const EXTENSIONS = ['.ts', '.html', '.css', '.py'];
 
 function walk(absolute: string, out: string[]): void {
   if (!statSync(absolute).isDirectory()) {
@@ -44,7 +48,11 @@ for (const target of TARGETS) {
 
 const entries = files
   .map((absolute) => {
-    const key = relative(root, absolute).split(sep).join(posix.sep);
+    // Frontend files are keyed from `frontend/`, so `server.ts` stays
+    // `server.ts`. Anything above it — the ADK backend — is keyed from the
+    // repo root instead, giving `backend/main.py` rather than `../backend/…`.
+    const base = relative(root, absolute).startsWith('..') ? repoRoot : root;
+    const key = relative(base, absolute).split(sep).join(posix.sep);
     const body = readFileSync(absolute, 'utf8');
     return `  ${JSON.stringify(key)}: ${JSON.stringify(body)},`;
   })

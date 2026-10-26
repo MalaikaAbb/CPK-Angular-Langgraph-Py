@@ -1,10 +1,11 @@
 import os
+from typing import Literal
 
 from dotenv import load_dotenv
 from ag_ui_langgraph import add_langgraph_fastapi_endpoint
-from copilotkit import LangGraphAGUIAgent
+from copilotkit import CopilotKitState, LangGraphAGUIAgent
 from fastapi import FastAPI
-from langgraph.graph import END, START, MessagesState, StateGraph
+from langgraph.graph import END, START, StateGraph
 from langgraph.prebuilt import ToolNode, tools_condition
 from langchain_core.messages import AIMessage, SystemMessage, ToolMessage
 from langchain_core.tools import tool
@@ -12,6 +13,22 @@ from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import MemorySaver
 import uvicorn
 load_dotenv()
+
+# The AG-UI dojo's FastAPI server sets this before importing its agents; the
+# subgraphs agent reads it to compile with a MemorySaver checkpointer.
+os.environ["LANGGRAPH_FAST_API"] = "true"
+
+# Imported after load_dotenv(): these modules build their models at import time.
+from agents.guardrails import agent as guardrails_graph
+from agents.subagents import graph as subagents_graph
+from agents.subgraphs import graph as subgraphs_graph
+
+
+class AgentState(CopilotKitState):
+  """Shared state with the frontend. LangGraph drops undeclared keys, so
+  every key the frontend reads or writes must be listed here."""
+  priority: Literal["low", "normal", "high"]
+
 
 @tool
 def getWeather(location: str) -> dict:
@@ -64,9 +81,14 @@ def answer_dangling_tool_calls(messages):
   return repaired
 
 
-async def mock_llm(state: MessagesState):
+async def mock_llm(state: AgentState):
   model = ChatOpenAI(model="gpt-4.1-mini").bind_tools(tools)
-  system_message = SystemMessage(content="You are a helpful assistant.")
+  system_message = SystemMessage(
+    content=(
+      "You are a helpful assistant.\n"
+      f"Current priority: {state.get('priority', 'normal')}\n"
+    )
+  )
   response = await model.ainvoke(
     [
       system_message,
@@ -76,7 +98,7 @@ async def mock_llm(state: MessagesState):
   return {"messages": response}
 
 
-graph = StateGraph(MessagesState)
+graph = StateGraph(AgentState)
 graph.add_node(mock_llm)
 graph.add_node("tools", ToolNode(tools))
 graph.add_edge(START, "mock_llm")
@@ -96,6 +118,51 @@ add_langgraph_fastapi_endpoint(
     graph=graph,
   ),
   path="/",
+)
+
+# The guides below define their graphs but not how they are served. Each gets
+# its own endpoint, mounted at /<demo name>, and server.ts registers it under
+# its own agent id.
+#
+# Served over FastAPI, a graph needs a checkpointer (ag_ui_langgraph reads the
+# thread state). The guides' create_agent graphs are written for LangGraph
+# Platform, which supplies one, so it is attached here — the same MemorySaver
+# the AG-UI dojo's FastAPI examples pass to create_agent.
+
+# https://docs.copilotkit.ai/angular/langgraph-python/multi-agent/subagents
+subagents_graph.checkpointer = MemorySaver()
+add_langgraph_fastapi_endpoint(
+  app=app,
+  agent=LangGraphAGUIAgent(
+    name="subagents",
+    description="A supervisor delegating to research, writing, and critique sub-agents.",
+    graph=subagents_graph,
+  ),
+  path="/subagents",
+)
+
+# https://docs.copilotkit.ai/angular/langgraph-python/subgraphs
+# The AG-UI dojo's subgraphs agent; it compiles its own MemorySaver.
+add_langgraph_fastapi_endpoint(
+  app=app,
+  agent=LangGraphAGUIAgent(
+    name="subgraphs",
+    description="A demo of LangGraph subgraphs using a Game Character Creator.",
+    graph=subgraphs_graph,
+  ),
+  path="/subgraphs",
+)
+
+# https://docs.copilotkit.ai/angular/langgraph-python/guardrails
+guardrails_graph.checkpointer = MemorySaver()
+add_langgraph_fastapi_endpoint(
+  app=app,
+  agent=LangGraphAGUIAgent(
+    name="guardrails",
+    description="An agent screened by PIIMiddleware ahead of CopilotKitMiddleware.",
+    graph=guardrails_graph,
+  ),
+  path="/guardrails",
 )
 
 def main():

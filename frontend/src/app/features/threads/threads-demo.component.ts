@@ -25,9 +25,10 @@ import { ThreadListComponent } from './thread-list.component';
         <h2 class="mb-2 text-sm font-semibold text-slate-900">
           CopilotThreadsDrawer + chat
         </h2>
-        <div class="flex min-h-0 flex-1 gap-4">
-          <app-conversations />
-        </div>
+        <!-- The drawer is a full-height column; the chat takes the remaining width. -->
+        <app-conversations
+          class="flex min-h-0 flex-1 overflow-hidden [&>copilot-chat]:min-w-0 [&>copilot-chat]:flex-1 [&>copilot-threads-drawer]:shrink-0"
+        />
       </section>
     </div>
   `,
